@@ -1,0 +1,40 @@
+@URL = http://localhost:4000
+@TYPE = /api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTc4Mzk5MzEsImV4cCI6MTU5Nzg0MzUzMX0.871jPFd1UoejSrNdiC0xZVPY-L47hB-ZMXmsTbsN4yg
+###
+POST {{URL}}{{TYPE}}/employeeLogin
+Content-Type: application/json
+
+{
+    "email":"employee@boiler.com",
+    "password":"qwe$7500"
+}
+
+### 
+POST {{URL}}{{TYPE}}/addEmployee
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "name":"employee",
+    "employeeId":"B12",
+    "userAccess":"employee",
+    "email":"employee@boiler.com",
+    "password":"qwe$7500",
+    "phone":9042141018
+}
+
+###
+DELETE {{URL}}{{TYPE}}/deleteEmployeeById/5f3d1aa2491708625039f065
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+GET  {{URL}}{{TYPE}}/getEmployee
+Content-Type: application/json
+Authorization: {{token}}
+
+### 
+PUT {{URL}}{{TYPE}}/updateEmployeeById/{"name":"employeeUpdated", "_id":"5f3d1b9c1a1b516425fa836b"}
+Content-Type: application/json
+Authorization: {{token}}

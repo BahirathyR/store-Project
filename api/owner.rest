@@ -1,0 +1,25 @@
+@URL = http://localhost:4000
+@TYPE = /api
+###
+POST {{URL}}{{TYPE}}/ownerLogin
+Content-Type: application/json
+
+{
+    "email":"owner@boiler.com",
+    "password":"qwe$7500"
+}
+
+###
+DELETE {{URL}}{{TYPE}}/checkdelete/1234566/abcdfv
+Content-Type: application/json
+
+### add owner
+POST {{URL}}{{TYPE}}/addOwner
+Content-Type: application/json
+
+{
+    "name":"owner",
+    "email":"owner@boiler.com",
+    "password":"qwe$7500",
+    "phone":9042141018
+}

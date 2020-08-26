@@ -1,0 +1,40 @@
+@URL = http://localhost:4000
+@TYPE = /api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTc4Mzk5MzEsImV4cCI6MTU5Nzg0MzUzMX0.871jPFd1UoejSrNdiC0xZVPY-L47hB-ZMXmsTbsN4yg
+###
+POST {{URL}}{{TYPE}}/supplierLogin
+Content-Type: application/json
+
+{
+    "email":"supplier@boiler.com",
+    "password":"qwe$7500"
+}
+
+### 
+POST {{URL}}{{TYPE}}/addSupplier
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "name":"supplier",
+    "address":"B12 last streen",
+    "GSTIN":"B1243234",
+    "email":"supplier@boiler.com",
+    "password":"qwe$7500",
+    "phone":9042141018
+}
+
+###
+DELETE {{URL}}{{TYPE}}/deleteSupplierById/5f3d21eb25c9297349aa9002
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+GET  {{URL}}{{TYPE}}/getSupplier
+Content-Type: application/json
+Authorization: {{token}}
+
+### 
+PUT {{URL}}{{TYPE}}/updateSupplierById/{"name":"employeeUpdated", "_id":"5f3d21eb25c9297349aa9002"}
+Content-Type: application/json
+Authorization: {{token}}

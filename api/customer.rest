@@ -1,0 +1,40 @@
+@URL = http://localhost:4000
+@TYPE = /api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTc4Mzk5MzEsImV4cCI6MTU5Nzg0MzUzMX0.871jPFd1UoejSrNdiC0xZVPY-L47hB-ZMXmsTbsN4yg
+
+###
+POST {{URL}}{{TYPE}}/customerLogin
+Content-Type: application/json
+
+{
+    "email":"customer@boiler.com",
+    "password":"qwe$7500"
+}
+
+### 
+POST {{URL}}{{TYPE}}/addCustomer
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "name":"customer",
+    "address":"B12 last streen",
+    "email":"customer@boiler.com",
+    "password":"qwe$7500",
+    "phone":9042141018
+}
+
+###
+DELETE {{URL}}{{TYPE}}/deleteCustomerById/5f3d228d25c9297349aa9003
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+GET  {{URL}}{{TYPE}}/getCustomer
+Content-Type: application/json
+Authorization: {{token}}
+
+### 
+PUT {{URL}}{{TYPE}}/updateCustomerById/{"name":"customerUpdated", "_id":"5f3d228d25c9297349aa9003"}
+Content-Type: application/json
+Authorization: {{token}}

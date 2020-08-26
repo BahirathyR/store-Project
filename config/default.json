@@ -1,0 +1,8 @@
+{
+  "jwtPrivateKey": "unsecureKey",
+  "db": "mongodb://localhost:27017/tarnea",
+  "dbName":"tarnea",
+  "port": "4000"
+}
+
+

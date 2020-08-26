@@ -1,0 +1,41 @@
+@URL = http://localhost:4000
+@TYPE = /api
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTc4Mzk5MzEsImV4cCI6MTU5Nzg0MzUzMX0.871jPFd1UoejSrNdiC0xZVPY-L47hB-ZMXmsTbsN4yg
+
+###
+POST {{URL}}{{TYPE}}/storeLogin
+Content-Type: application/json
+
+{
+    "email":"stroe@boiler.com",
+    "password":"qwe$7500"
+}
+
+### 
+POST {{URL}}{{TYPE}}/addStore
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "name":"stroe",
+    "address":"B12 last streen",
+    "GSTIN":"B12 Street",
+    "email":"stroe@boiler.com",
+    "password":"qwe$7500",
+    "phone":9042141018
+}
+
+###
+DELETE {{URL}}{{TYPE}}/deleteStoreById/5f3d239025c9297349aa9004
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+GET  {{URL}}{{TYPE}}/getStore
+Content-Type: application/json
+Authorization: {{token}}
+
+### 
+PUT {{URL}}{{TYPE}}/updateStoreById/{"name":"stroeUpdated", "_id":"5f3d239025c9297349aa9004"}
+Content-Type: application/json
+Authorization: {{token}}
