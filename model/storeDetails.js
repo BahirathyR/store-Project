@@ -9,11 +9,18 @@ const storeSchema = new mongoose.Schema({
     maxlength: 50,
     default: ""
   },
+  lastName:{
+    type: String,
+    required: true,
+    minlength: 0,
+    maxlength: 50,
+    default: ""
+  },
   address: {
     type: String,
     required: true
   },
-  GSTIN: {
+  gstin: {
     type: String,
     required: true
   },
@@ -26,7 +33,23 @@ const storeSchema = new mongoose.Schema({
     required: true,
     type: String,
   },
-  phone: {
+  confirmPassword:{
+    required: true,
+    type: String,
+  },
+  panNo:{
+    type: String,
+    required: true
+  },
+  storeName:{
+    type: String,
+    required: true
+  },
+  pinCode:{
+    type: String,
+    required: true
+  },
+  mobileNo: {
     type: String,
     unique: true,
     validate: {

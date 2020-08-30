@@ -6,6 +6,8 @@ const { token } = require('../middleware/auth');
 exports.login = async (req, res) => {
     const { email, password } = req.body;
     const data = await Owner.findOne({ email, password });
+    if(!data)
+    return res.status(401).json({status:401,message:"authentication failed"})
     const _token = token(data['token']);
     console.log('data', data);
     return res.status(200).json({

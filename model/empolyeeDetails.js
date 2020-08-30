@@ -1,19 +1,35 @@
 const mongoose = require("mongoose");
 
 const employeeSchema = new mongoose.Schema({
+  empId:{
+    type: String,
+    required: true
+  },
   name: {
     type: String,
     required: true,
     minlength: 0,
-    maxlength: 50
+    maxlength: 50,
+    default: ""
   },
-  employeeId: {
+  lastName:{
+    type: String,
+    required: true,
+    minlength: 0,
+    maxlength: 50,
+    default: ""
+  },
+  address: {
     type: String,
     required: true
   },
-  userAccess: {
+  pinNo: {
     type: String,
-    required: true // manager, sales, 
+    required: true
+  },
+  companyName: {
+    type: String,
+    required: true
   },
   email: {
     required: true,
@@ -24,7 +40,23 @@ const employeeSchema = new mongoose.Schema({
     required: true,
     type: String,
   },
-  phone: {
+  confirmPassword:{
+    required: true,
+    type: String,
+  },
+  panNo:{
+    type: String,
+    required: true
+  },
+  dob:{
+    type:Date,
+    required: true
+  },
+  designation:{
+    type:String,
+    required: true
+  },
+  mobileNo: {
     type: String,
     unique: true,
     validate: {
@@ -33,7 +65,7 @@ const employeeSchema = new mongoose.Schema({
       },
       message: props => `${props.value} is not a valid phone number!`
     },
-    required: [true, 'Employee phone number required']
+    required: [true, 'Store phone number required']
   }
 });
 

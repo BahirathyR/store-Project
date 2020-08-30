@@ -2,10 +2,14 @@
 
 const { Customer } = require("../model/customerDetails");
 const { token } = require('../middleware/auth');
+const bcrypt = require("bcrypt");
+
 
 exports.login = async (req, res) => {
     const { email, password } = req.body;
     const data = await Customer.findOne({ email, password });
+    if(!data)
+    return res.status(401).json({status:401,message:"authentication failed"})
     const _token = token(data['token']);
     console.log('data', data);
     return res.status(200).json({
@@ -17,9 +21,10 @@ exports.login = async (req, res) => {
 }
 
 exports.addCustomer = async (req, res) => {
+    console.log("add the customer")
     const body = req.body;
     const customer = new Customer(body);
-    await customer.save();
+     await customer.save();
     return res.status(200).json({
         status: 200,
         message: "Customer successfully added.."
@@ -28,6 +33,15 @@ exports.addCustomer = async (req, res) => {
 
 exports.getCustomer = async (req, res) => {
     const data = await Customer.find({});
+    return res.status(200).json({
+        status: 200,
+        message: "Data suessfully fetched",
+        data
+    });
+}
+exports.getbyIDCustomer = async (req, res) => {
+    const { _id } = req.params;
+    const data = await Customer.find({_id});
     return res.status(200).json({
         status: 200,
         message: "Data suessfully fetched",
@@ -47,15 +61,28 @@ exports.deleteCustomerById = async (req, res) => {
 }
 
 exports.updateCustomer = async (req, res) => {
-    const params = req.params;
-    const receiveData = JSON.parse(params.data)
+    console.log("para")
+    
+    const receiveData = req.body;
+    console.log("receiveData",receiveData)
+    console.log("recc",receiveData._id)
     const update = { $set: receiveData };
     const query = { _id: receiveData._id };
     const data = await Customer.update(query, update);
     console.log('data', data);
-    return res.status(200).json({
-        status: 200,
-        message: "Successfully Updated",
-        updatedCount: data.n
-    });
+    if(data.n>0){
+        return res.status(200).json({
+            status: 200,
+            message: "Successfully Updated",
+            updatedCount: data.n
+        });
+    }
+    else{
+        return res.status(202).json({
+            status: 202,
+            message: "failed Update",
+            updatedCount: data.n
+        });
+    }
+
 }

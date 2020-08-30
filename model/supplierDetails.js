@@ -7,36 +7,55 @@ const supplierSchema = new mongoose.Schema({
         minlength: 0,
         maxlength: 50,
         default: ""
-    },
-    address: {
+      },
+      lastName:{
+        type: String,
+        required: true,
+        minlength: 0,
+        maxlength: 50,
+        default: ""
+      },
+      address: {
         type: String,
         required: true
-    },
-    GSTIN: {
+      },
+      gstin: {
         type: String,
         required: true
-    },
-    email: {
+      },
+      email: {
         required: true,
         type: String,
         unique: true
-    },
-    password: {
+      },
+      pinNo:{
+        type: String,
+        required: true
+      },
+      password: {
         required: true,
         type: String,
-    },
-    phone: {
+      },
+      confirmPassword:{
+        required: true,
+        type: String,
+      },
+      panNo:{
+        type: String,
+        required: true
+      },
+      mobileNo: {
         type: String,
         unique: true,
         validate: {
-            validator: function (v) {
-                return /\w/.test(v);
-            },
-            message: props => `${props.value} is not a valid phone number!`
+          validator: function (v) {
+            return /\w/.test(v);
+          },
+          message: props => `${props.value} is not a valid phone number!`
         },
         required: [true, 'Store phone number required']
-    }
-});
+      }
+    });
 
 const Supplier = mongoose.model("Supplier", supplierSchema);
 exports.Supplier = Supplier;

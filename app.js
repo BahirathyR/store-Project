@@ -12,7 +12,7 @@ require("./startup/db")();
 
 const routes = require("./routes/routes");
 app.use("/api", routes);
-// app.use(error)
+//  app.use(error)
 
 const port = process.env.PORT || config.get("port");
 app.listen(port, () => {

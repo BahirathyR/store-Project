@@ -1,6 +1,8 @@
 @URL = http://localhost:4000
 @TYPE = /api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTc4Mzk5MzEsImV4cCI6MTU5Nzg0MzUzMX0.871jPFd1UoejSrNdiC0xZVPY-L47hB-ZMXmsTbsN4yg
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTg4MTk2ODEsImV4cCI6MTU5ODgyMzI4MX0.d4p4LF5CXWpUIau9kVEoGYoO1hAcLOaq52RqJfSVYgA
+
+
 ###
 POST {{URL}}{{TYPE}}/employeeLogin
 Content-Type: application/json
@@ -16,12 +18,19 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "name":"employee",
-    "employeeId":"B12",
-    "userAccess":"employee",
+    "empId":"Id",
+     "name":"employee",
+     "lastName":"lastname",
+    "address":"B12 last streen",
+    "panNo":"B12 Street",
     "email":"employee@boiler.com",
     "password":"qwe$7500",
-    "phone":9042141018
+    "confirmPassword":"qwe$7500",
+    "mobileNo":9042141018,
+    "dob":"02-03-2020",
+    "designation":"desig",
+    "companyName":"company",
+    "pinNo":"pinno",
 }
 
 ###
@@ -35,6 +44,23 @@ Content-Type: application/json
 Authorization: {{token}}
 
 ### 
-PUT {{URL}}{{TYPE}}/updateEmployeeById/{"name":"employeeUpdated", "_id":"5f3d1b9c1a1b516425fa836b"}
+POST {{URL}}{{TYPE}}/updateEmployeeById
 Content-Type: application/json
 Authorization: {{token}}
+{
+
+    "_id":"5f492610bee1b569812648f2",
+    "empId":"Id",
+     "name":"employee",
+     "lastName":"lastname",
+    "address":"B12 last streen",
+    "panNo":"B12 Street",
+    "email":"employee@boiler.com",
+    "password":"qwe$7500",
+    "confirmPassword":"qwe$7500",
+    "mobileNo":9042141018,
+    "dob":"02-03-2020",
+    "designation":"desig",
+    "companyName":"company",
+    "pinNo":"pinno",
+}

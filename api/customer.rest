@@ -1,6 +1,6 @@
 @URL = http://localhost:4000
 @TYPE = /api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTc4Mzk5MzEsImV4cCI6MTU5Nzg0MzUzMX0.871jPFd1UoejSrNdiC0xZVPY-L47hB-ZMXmsTbsN4yg
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTg4MjIwMzUsImV4cCI6MTU5ODgyNTYzNX0.geBrmZ7M65RhyXtiSciGArZn6UY2qOF-MC0XRNMC7w4
 
 ###
 POST {{URL}}{{TYPE}}/customerLogin
@@ -17,11 +17,13 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "name":"customer",
+    "name":"dinesh",
+    "lastName":"dfd",
     "address":"B12 last streen",
-    "email":"customer@boiler.com",
-    "password":"qwe$7500",
-    "phone":9042141018
+    "email":"c@boiler.com",
+    "phone":9042141018,
+    "panNo":"B1243234",
+    "pinNo":"6777",
 }
 
 ###
@@ -35,6 +37,23 @@ Content-Type: application/json
 Authorization: {{token}}
 
 ### 
-PUT {{URL}}{{TYPE}}/updateCustomerById/{"name":"customerUpdated", "_id":"5f3d228d25c9297349aa9003"}
+POST {{URL}}{{TYPE}}/updateCustomerById
+Content-Type: application/json
+Authorization: {{token}}
+
+{     
+     "_id":"5f4a89c6419015149ded70f7",
+    "name":"customer",
+    "lastName":"kayal",
+    "address":"B12 last streen",
+    "email":"customer@boiler.com",
+    "phoneNo":9042141018,
+    "panNo":"B1243234",
+    "pinNo":"6777",
+}
+
+###
+
+GET  {{URL}}{{TYPE}}/getbyIDCustomer/{"_id":"5f3d228d25c9297349aa9003"}
 Content-Type: application/json
 Authorization: {{token}}

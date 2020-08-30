@@ -2,6 +2,8 @@
 
 const { Store } = require("../model/storeDetails");
 const { token } = require('../middleware/auth');
+const bcrypt = require("bcrypt");
+
 
 exports.login = async (req, res) => {
     const { email, password } = req.body;
@@ -18,6 +20,8 @@ exports.login = async (req, res) => {
 
 exports.addStore = async (req, res) => {
     const body = req.body;
+    body.password = bcrypt.hashSync(body.password, 10);
+    console.log("body",body)
     const obj = new Store(body);
     await obj.save();
     return res.status(200).json({
@@ -47,15 +51,26 @@ exports.deleteStoreById = async (req, res) => {
 }
 
 exports.updateStore = async (req, res) => {
-    const params = req.params;
-    const receiveData = JSON.parse(params.data)
+    console.log("store update")
+    const receiveData = req.body;
+    console.log("receiveData",receiveData)
+    console.log("recc",receiveData._id)
     const update = { $set: receiveData };
     const query = { _id: receiveData._id };
     const data = await Store.update(query, update);
     console.log('data', data);
-    return res.status(200).json({
-        status: 200,
-        message: "Successfully Updated",
-        updatedCount: data.n
-    });
+    if(data.n>0){
+        return res.status(200).json({
+            status: 200,
+            message: "Successfully Updated",
+            updatedCount: data.n
+        });
+    }
+    else{
+        return res.status(202).json({
+            status: 202,
+            message: "failed Update",
+            updatedCount: data.n
+        });
+}
 }

@@ -2,23 +2,38 @@
 
 const { Employee } = require("../model/empolyeeDetails");
 const { token } = require('../middleware/auth');
+const bcrypt = require("bcrypt");
+
 
 exports.login = async (req, res) => {
-    const { email, password } = req.body;
-    const data = await Employee.findOne({ email, password });
-    const _token = token(data['token']);
+    console.log("store update")
+    const receiveData = req.body;
+    console.log("receiveData",receiveData)
+    console.log("recc",receiveData._id)
+    const update = { $set: receiveData };
+    const query = { _id: receiveData._id };
+    const data = await Employee.update(query, update);
     console.log('data', data);
-    return res.status(200).json({
-        status: 200,
-        message: "Successfully logged in..",
-        data,
-        token: _token
-    });
+    if(data.n>0){
+        return res.status(200).json({
+            status: 200,
+            message: "Successfully Updated",
+            updatedCount: data.n
+        });
+    }
+    else{
+        return res.status(202).json({
+            status: 202,
+            message: "failed Update",
+            updatedCount: data.n
+        });
+}
 }
 
 exports.addEmployee = async (req, res) => {
     console.log('init addEmployee');
     const body = req.body;
+    body.password = bcrypt.hashSync(body.password, 10);
     const obj = new Employee(body);
     await obj.save();
     return res.status(200).json({
@@ -48,16 +63,25 @@ exports.deleteEmployeeById = async (req, res) => {
 }
 
 exports.updateEmployee = async (req, res) => {
-    const params = req.params;
-    const receiveData = JSON.parse(params.data)
+    const receiveData = req.body;
+    console.log("receiveData",receiveData)
+    console.log("recc",receiveData._id)
     const update = { $set: receiveData };
     const query = { _id: receiveData._id };
-    console.log('update', update);
     const data = await Employee.update(query, update);
     console.log('data', data);
-    return res.status(200).json({
-        status: 200,
-        message: "Successfully Updated",
-        updatedCount: data.n
-    });
+    if(data.n>0){
+        return res.status(200).json({
+            status: 200,
+            message: "Successfully Updated",
+            updatedCount: data.n
+        });
+    }
+    else{
+        return res.status(202).json({
+            status: 202,
+            message: "failed Update",
+            updatedCount: data.n
+        });
+    }
 }

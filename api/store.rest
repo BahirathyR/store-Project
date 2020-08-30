@@ -1,6 +1,6 @@
 @URL = http://localhost:4000
 @TYPE = /api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTc4Mzk5MzEsImV4cCI6MTU5Nzg0MzUzMX0.871jPFd1UoejSrNdiC0xZVPY-L47hB-ZMXmsTbsN4yg
+@token =eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTg4MTc2MjIsImV4cCI6MTU5ODgyMTIyMn0.SCU5yhzJnsLJD_Emhy9ilHWACmmyLyz__Tpyf-WHRA8
 
 ###
 POST {{URL}}{{TYPE}}/storeLogin
@@ -17,12 +17,18 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "name":"stroe",
+   "name":"stroe",
+    "lastName":"hwuu",
     "address":"B12 last streen",
-    "GSTIN":"B12 Street",
+    "gstin":"B12 Street",
     "email":"stroe@boiler.com",
     "password":"qwe$7500",
-    "phone":9042141018
+    "mobileNo":9042141018,
+    "password":"djfdjfdd",
+    "confirmPassword":"djfdjfdd",
+    "panNo":"123455455",
+    "storeName":"dhddd",
+    "pinCode":"3333"
 }
 
 ###
@@ -36,6 +42,28 @@ Content-Type: application/json
 Authorization: {{token}}
 
 ### 
-PUT {{URL}}{{TYPE}}/updateStoreById/{"name":"stroeUpdated", "_id":"5f3d239025c9297349aa9004"}
+# PUT {{URL}}{{TYPE}}/updateStoreById/{"name":"stroeUpdated", "_id":"5f3d239025c9297349aa9004"}
+# Content-Type: application/json
+# Authorization: {{token}}
+
+POST {{URL}}{{TYPE}}/updateStoreById
 Content-Type: application/json
 Authorization: {{token}}
+
+{
+
+     "_id":"5f4ac601a90b2a7ee61fb91d",
+    "name":"stroe",
+    "lastName":"hwuu",
+    "address":"B12 last streen",
+    "gstin":"B12 Street",
+    "email":"stroe@boiler.com",
+    "password":"qwe$7500",
+    "mobileNo":9042141018,
+    "password":"djfdjfdd",
+    "confirmPassword":"djfdjfdd",
+    "panNo":"123455455",
+    "storeName":"dhddd",
+    "pinCode":"3333"
+
+}
