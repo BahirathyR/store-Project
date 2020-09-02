@@ -1,32 +1,53 @@
-// @ts-check
 
 const { Supplier } = require("../model/supplierDetails");
 const { token } = require("../middleware/auth");
 const bcrypt = require("bcrypt");
 
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
-  const data = await Supplier.findOne({ email, password });
-  const _token = token(data["token"]);
-  console.log("data", data);
+  const { email} = req.body;
+  const data = await Supplier.findOne({ email });
+  console.log('data', data);
+  if(!data && data===null){
+  return res.status(401).json({status:401,message:"EmailId Invalid"})
+  }
+  const _token = token(data['token']);
+  bcrypt.compare(req.body.password,data.password, function(err,result){
+      console.log("password",result)
+      console.log("datapassword",data.password)
+      if(err){
+       return res.status(400).json("Invalid password")
+      }
+else{
   return res.status(200).json({
-    status: 200,
-    message: "Successfully logged in..",
-    data,
-    token: _token,
+      status: 200,
+      message: "Successfully logged in..",
+      data,
+      token:_token
   });
-};
+}
+  })
+}
 
 exports.addSupplier = async (req, res) => {
   const body = req.body;
 body.password = bcrypt.hashSync(body.password, 10);
   const obj = new Supplier(body);
-  await obj.save();
-  return res.status(200).json({
-    status: 200,
-    message: "Supplier successfully added..",
-  });
-};
+  obj.save().then(function(result){
+    console.log("hgghj")
+    return res.status(200).json({
+        status: 200,
+        message: "suplier details successfully added.."
+    });
+}).catch(function(err){
+    console.log("erorrrr",err)
+    if(err.code===11000){
+        return res.status(404).json({
+            status: 404,
+            message: err.errmsg
+        });
+    }
+})
+}
 
 exports.getSupplier = async (req, res) => {
   const data = await Supplier.find({});

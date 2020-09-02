@@ -6,8 +6,10 @@ POST {{URL}}{{TYPE}}/supplierLogin
 Content-Type: application/json
 
 {
-    "email":"supplier@boiler.com",
-    "password":"qwe$7500"
+    //"email":"supplier@boiler.com",
+    //"password":"qwe$7500"
+    "email":"fgg@gmail.com",
+    "password":"ssssss"
 }
 
 ### 

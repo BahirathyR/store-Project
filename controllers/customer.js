@@ -1,4 +1,3 @@
-// @ts-check
 
 const { Customer } = require("../model/customerDetails");
 const { token } = require('../middleware/auth');
@@ -6,12 +5,20 @@ const bcrypt = require("bcrypt");
 
 
 exports.login = async (req, res) => {
-    const { email, password } = req.body;
-    const data = await Customer.findOne({ email, password });
-    if(!data)
-    return res.status(401).json({status:401,message:"authentication failed"})
-    const _token = token(data['token']);
+    const { email} = req.body;
+    const data = await Customer.findOne({ email });
     console.log('data', data);
+    if(!data && data===null){
+    return res.status(401).json({status:401,message:"EmailId Invalid"})
+    }
+    const _token = token(data['token']);
+    bcrypt.compare(req.body.password,data.password, function(err,result){
+        console.log("password",result)
+        console.log("datapassword",data.password)
+        if(err){
+         return res.status(400).json("Invalid password")
+        }
+else{
     return res.status(200).json({
         status: 200,
         message: "Successfully logged in..",
@@ -19,17 +26,29 @@ exports.login = async (req, res) => {
         token:_token
     });
 }
+    })
+}
 
 exports.addCustomer = async (req, res) => {
     console.log("add the customer")
     const body = req.body;
-    const customer = new Customer(body);
-     await customer.save();
-    return res.status(200).json({
-        status: 200,
-        message: "Customer successfully added.."
-    });
-}
+    const obj = new Customer(body);
+    obj.save().then(function(result){
+        console.log("hgghj")
+        return res.status(200).json({
+            status: 200,
+            message: "Customer successfully added.."
+        });
+    }).catch(function(err){
+        console.log("erorrrr",err)
+        if(err.code===11000){
+            return res.status(404).json({
+                status: 404,
+                message: err.errmsg
+            });
+        }
+    })
+    }
 
 exports.getCustomer = async (req, res) => {
     const data = await Customer.find({});

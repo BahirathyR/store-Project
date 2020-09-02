@@ -1,6 +1,6 @@
 @URL = http://localhost:4000
 @TYPE = /api
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTg4MTk2ODEsImV4cCI6MTU5ODgyMzI4MX0.d4p4LF5CXWpUIau9kVEoGYoO1hAcLOaq52RqJfSVYgA
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1OTkwNTIwMDksImV4cCI6MTU5OTA1NTYwOX0.lVM8Bj0RRS7CaDDp0DfxONJkAdQpRea3TfDvgBI2tJY
 
 
 ###
@@ -8,8 +8,10 @@ POST {{URL}}{{TYPE}}/employeeLogin
 Content-Type: application/json
 
 {
-    "email":"employee@boiler.com",
-    "password":"qwe$7500"
+    //"email":"employee@boiler.com",
+  // "password":"qwe$7500"
+   "email":"patrick@gmail.com",
+    "password":"patrickraj"
 }
 
 ### 
